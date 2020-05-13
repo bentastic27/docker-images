@@ -17,7 +17,7 @@ spec:
             - name: RECORDSET
               value: example.com
             - name: TTL
-              value: 300
+              value: "300"
             - name: TYPE
               value: A
             volumeMounts:
