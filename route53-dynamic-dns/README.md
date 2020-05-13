@@ -18,7 +18,13 @@ This image requires a policy like the following:
 }
 ```
 
-Put your AWS credentials file at `/root/.aws/credentials` in the image. For Kubernetes, create your secret like this:
+Put your AWS credentials file at `/root/.aws/credentials` in the image. To run from docker, run like this:
+
+```
+docker run --rm -e ZONEID=somezoneid -e RECORDSET=example.com-e TTL=300 -e TYPE=A -v /home/someuser/.aws:/root/.aws bentastic27/route53-dynamic-dn
+```
+
+For Kubernetes, create your secret like this:
 
 ```
 kubectl create secret generic aws-credentials --from-file=$HOME/.aws/credentials
