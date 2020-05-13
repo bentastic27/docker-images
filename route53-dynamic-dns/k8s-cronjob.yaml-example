@@ -1,0 +1,31 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: route53-dynamic-dns
+spec:
+  schedule: "0 */6 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: route53-dynamic-dns
+            image: bentastic27/route53-dynamic-dns
+            env:
+            - name: ZONEID
+              value: somehostedzoneidhere
+            - name: RECORDSET
+              value: example.com
+            - name: TTL
+              value: 300
+            - name: TYPE
+              value: A
+            volumeMounts:
+            - name: aws-credentials
+              mountPath: /root/.aws
+              readOnly: true
+          restartPolicy: OnFailure
+          volumes:
+          - name: aws-credentials
+            secret:
+              secretName: aws-credentials
