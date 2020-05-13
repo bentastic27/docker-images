@@ -12,7 +12,7 @@ This image requires a policy like the following:
             "Action": [
                 "route53:ChangeResourceRecordSets"
             ],
-            "Resource": "arn:aws:route53:::hostedzone/Z0466241UWHPLQN701UT"
+            "Resource": "arn:aws:route53:::hostedzone/somezoneidhere"
         }
     ]
 }
