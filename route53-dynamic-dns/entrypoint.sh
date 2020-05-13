@@ -40,7 +40,7 @@ if ! valid_ip $CURRENT_RECORD; then
 fi
 
 # Check if the IP has changed
-if [ "$IP" = "$CURRENT_RECORD"]; then
+if [ "$IP" = "$CURRENT_RECORD" ]; then
     # code if found
     echo "IP is still $IP. Exiting"
     exit 0

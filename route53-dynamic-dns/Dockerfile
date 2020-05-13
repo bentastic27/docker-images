@@ -4,4 +4,4 @@ RUN apt-get update && apt install curl unzip dnsutils --yes && \
     unzip awscliv2.zip && ./aws/install && rm awscliv2.zip && \
     apt remove curl unzip --yes && apt autoremove --yes && apt clean --yes
 COPY entrypoint.sh /
-ENTRYPOINT ["/bin/sh", "/entrypoint.sh"]
+ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]
