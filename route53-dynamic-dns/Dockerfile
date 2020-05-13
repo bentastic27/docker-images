@@ -1,7 +1,8 @@
 FROM ubuntu
-RUN apt-get update && apt install curl unzip dnsutils --yes && \
-    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
-    unzip awscliv2.zip && ./aws/install && rm awscliv2.zip && \
-    apt remove curl unzip --yes && apt autoremove --yes && apt clean --yes
+
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt install curl dnsutils python3 python3-pip --yes && \
+    pip3 install awscli --upgrade --no-cache-dir && \
+    apt remove curl python3-pip --yes && apt autoremove --yes && apt clean --yes
+
 COPY entrypoint.sh /
 ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]
