@@ -24,7 +24,7 @@ data:
             "level": 4
         },
     ]
-  server.properties: |
+  server.properties: | # be sure to change the rcon password if you want
     allow-flight=false
     allow-nether=true
     broadcast-console-to-ops=true
