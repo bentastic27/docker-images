@@ -7,5 +7,13 @@ latest_release=$(echo $manifest_data | jq -r '.latest.release')
 latest_release_url=$(echo $manifest_data | jq -r ".versions[] | select(.id == \"${latest_release}\") | .url")
 server_download_url=$(curl $latest_release_url | jq -r '.downloads.server.url')
 
-docker build . -t $repo:$latest_release --build-arg server_download_url=$server_download_url
-docker tag $repo:$latest_release $repo:latest
+# retro stuff here
+# docker build . -t $repo:$latest_release --build-arg server_download_url=$server_download_url
+# docker tag $repo:$latest_release $repo:latest
+
+docker buildx build \
+  --platform linux/amd64,linux/arm64 \
+  --build-arg server_download_url=$server_download_url \
+  --tag $repo:$latest_release \
+  --tag $repo:latest \
+  --push .
