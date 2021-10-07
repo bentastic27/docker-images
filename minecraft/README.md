@@ -16,14 +16,6 @@ kind: ConfigMap
 metadata:
   name: minecraft-config
 data:
-  ops.json: | # hardcoded ops, add yours here
-    [
-        {
-            "uuid": "32e47981-e1aa-470f-8b16-979a6a657d71",
-            "name": "bentastic27",
-            "level": 4
-        },
-    ]
   server.properties: | # be sure to change the rcon password if you want
     allow-flight=false
     allow-nether=true
@@ -106,7 +98,6 @@ spec:
         - -f
         - /srv/server.jar
         - /srv/eula.txt
-        - /config/ops.json
         - /config/server.properties
         - /data/
         image: bentastic27/minecraft:1.17.1
@@ -126,8 +117,6 @@ spec:
         configMap:
           name: minecraft-config
           items:
-          - key: ops.json
-            path: ops.json
           - key: server.properties
             path: server.properties
 ```
