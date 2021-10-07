@@ -1,3 +1,5 @@
+It's worth noting that rcon is enabled by default with "password" as the password. This can be changed by mounting the volume created by the docker command or by changing the relavent lines in the config map for the Kubernetes example.
+
 docker run example:
 
 ```
