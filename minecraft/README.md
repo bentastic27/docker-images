@@ -84,13 +84,22 @@ spec:
         app: minecraft
     spec:
       containers:
-      - image: bentastic27/minecraft:1.17.1
+      - image: bentastic27/minecraft:latest
         name: minecraft
         ports:
         - containerPort: 25565
           hostPort: 25565
           name: minecraft
           protocol: TCP
+        env:
+        - name: EULA
+          value: "true"
+        - name: MAX_MEMORY_SIZE
+          value: 2G
+        - name: INIT_MEMORY_SIZE
+          value: 1G
+        - name: MCRCON_PASS # change in server.properties configmap as well
+          value: password
         volumeMounts:
         - mountPath: /srv
           name: minecraft
@@ -98,13 +107,11 @@ spec:
       - command:
         - cp
         - -f
-        - /srv/server.jar
-        - /srv/eula.txt
         - /config/server.properties
         - /data/
-        image: bentastic27/minecraft:1.17.1
+        image: alpine:3.15.0
         imagePullPolicy: Always
-        name: copy-jarfile
+        name: copy-configs
         volumeMounts:
         - mountPath: /data
           name: minecraft
