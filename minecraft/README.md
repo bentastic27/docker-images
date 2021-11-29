@@ -1,12 +1,27 @@
 It's worth noting that rcon is enabled by default with "password" as the password. This can be changed by mounting the volume created by the docker command or by changing the relavent lines in the config map for the Kubernetes example.
 
+The available envvars are (and defaults):
+
+```
+INIT_MEMORY_SIZE / 1G
+MAX_MEMORY_SIZE / 1G
+MINECRAFT_VERSION / latest
+
+MCRCON_HOST / 127.0.0.1
+MCRCON_PORT / 25575
+MCRCON_PASS / password
+```
+
+Upgrading to the latest MC server involves just restarting the container with either `MINECRAFT_SERVER` set to the newer version, or simply restarting the container without it set. The entrypoint script will calculate the latest and download if needed. It's important to note that pinning the server version with `MINECRAFT_SERVER` is likely desired if breaking changes come down the pipe from Mojang/Microsoft.
+
 docker run example:
 
 ```
 docker run -d --name minecraft \
   -p 25565:25565 \
-  -v minecraft:/srv bentastic27/minecraft:latest \
   -e MAX_MEMORY_SIZE=2G \
+  -e MINECRAFT_VERSION=1.17.1 \
+  -v minecraft:/srv \
   bentastic27/minecraft:latest
 ```
 
